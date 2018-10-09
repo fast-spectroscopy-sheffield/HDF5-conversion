@@ -4,7 +4,7 @@ A simple app for batch converting the HDF5 files that are produced by the TA sof
 
 ### Current Usage
 
-Double click the shortcut HDF5 on the desktop to open the UI. At the moment this is a shortcut to a windows batch file that runs `python app.py' to launch the app. Eventually I'll package the whole thing up into an executable.
+Double click the shortcut HDF5 on the desktop to open the UI. At the moment this is a shortcut to a windows batch file that runs `python app.py` to launch the app. Eventually I'll package the whole thing up into an executable.
 
 Wait for the app to load (may take a little while). Drag and drop your HDF5 file(s) into the file list. Once you're happy with the list click "load all". Browse for a folder to save the converted data to, choose which parts of the data you want to save using the checkboxes and hit "convert".
 
