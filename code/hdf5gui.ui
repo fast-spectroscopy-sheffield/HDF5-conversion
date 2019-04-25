@@ -199,6 +199,9 @@
      <property name="text">
       <string>probe, reference and error spectra for each sweep</string>
      </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QCheckBox" name="sweeps_check">
      <property name="geometry">
@@ -211,6 +214,9 @@
      </property>
      <property name="text">
       <string>dT/T data for each sweep</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="convert_button">

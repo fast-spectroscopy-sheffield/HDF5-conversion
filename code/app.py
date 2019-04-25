@@ -108,11 +108,19 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             fpath = os.path.join(savedir, 'average_dTT.Dtc')
             self.write_console('saving averaged dT/T data to {0}'.format(str(fpath)))
             np.savetxt(fpath, array, delimiter=',')
+            fpath = os.path.join(savedir, 'datetimeinfo.txt')
+            g = f.get('Average')
+            with open(fpath, 'w') as fmd:
+                fmd.write('start: '+str(g.attrs['start date'], 'utf-8')+' '+str(g.attrs['start time'], 'utf-8')+'\n')
+                fmd.write('end: '+str(g.attrs['end_date'], 'utf-8')+' '+str(g.attrs['end_time'], 'utf-8')+'\n')
         if self.metadata_check.isChecked():
             array = np.array(f['Metadata'])  # might want the transpose ???
-            fpath = os.path.join(savedir, 'metadata.csv')
+            g = f.get('Metadata')
+            fpath = os.path.join(savedir, 'metadata.txt')
+            with open(fpath, 'w') as fmd:
+                for key in g.attrs:
+                    fmd.write(str(key)+': '+str(g.attrs[key], 'utf-8')+'\n')  
             self.write_console('saving metadata to {0}'.format(str(fpath)))
-            np.savetxt(fpath, array, delimiter=',')
         if self.spectra_check.isChecked():
             newsavedir = self.mkdir(savedir, 'sweeps')
             wavelength = np.array(f['Average'])[0,1:]
@@ -134,6 +142,10 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
                 fpath = os.path.join(folder, 'dTT.Dtc')
                 self.write_console('saving sweep dT/T data to {0}'.format(fpath))
                 np.savetxt(fpath, array, delimiter=',')
+                fpath = os.path.join(folder, 'datetimeinfo.txt')
+                attr = group.get(sweep)
+                with open(fpath, 'w') as fmd:
+                    fmd.write(str(attr.attrs['date'], 'utf-8')+' '+str(attr.attrs['time'], 'utf-8')+'\n')
         f.close()
         self.write_console('finished file <{0}>'.format(fname))
         
